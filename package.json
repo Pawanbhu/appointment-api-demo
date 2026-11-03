@@ -1,0 +1,19 @@
+{
+  "name": "appointment-api-demo",
+  "version": "1.0.0",
+  "description": "Demo: AI-assisted Node.js API with tests",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/server.js",
+    "coverage": "node --test --experimental-test-coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
