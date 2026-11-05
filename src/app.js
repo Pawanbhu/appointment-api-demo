@@ -1,9 +1,14 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
 const { createStore } = require('./slots');
+const openapi = require('./openapi');
 
 function createApp(store = createStore()) {
   const app = express();
   app.use(express.json());
+
+  app.get('/openapi.json', (req, res) => res.json(openapi));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi));
 
   app.get('/health', (req, res) => res.json({ status: 'ok' }));
 

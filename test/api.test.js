@@ -48,3 +48,12 @@ test('GET list and DELETE flow', async () => {
   const missing = await fetch(`${url}/appointments/${list[0].id}`, { method: 'DELETE' });
   assert.equal(missing.status, 404);
 });
+
+test('GET /docs serves Swagger UI and /openapi.json the spec', async () => {
+  const docs = await fetch(`${url}/docs/`);
+  assert.equal(docs.status, 200);
+  assert.match(await docs.text(), /swagger-ui/i);
+  const spec = await (await fetch(`${url}/openapi.json`)).json();
+  assert.equal(spec.openapi, '3.0.3');
+  assert.ok(spec.paths['/appointments'].post);
+});

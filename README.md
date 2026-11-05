@@ -7,10 +7,12 @@ I built it with AI coding tools, then reviewed it, tested it and fixed what the 
 
 ```bash
 npm install
-npm test            # 11 tests (unit + API), Node's built-in test runner
+npm test            # 12 tests (unit + API), Node's built-in test runner
 npm run coverage    # coverage report
 npm start           # http://localhost:3000
 ```
+
+Interactive API docs (Swagger UI): http://localhost:3000/docs. The raw OpenAPI spec is at `/openapi.json`.
 
 Try it by hand:
 
@@ -24,6 +26,8 @@ curl localhost:3000/doctors/dr-1/appointments
 
 | Method | Path | Result |
 |---|---|---|
+| GET | `/docs` | Swagger UI |
+| GET | `/openapi.json` | OpenAPI 3 spec |
 | GET | `/health` | `{status:"ok"}` |
 | POST | `/appointments` | 201 created · 400 invalid input · 409 slot taken |
 | GET | `/doctors/:doctorId/appointments?date=` | sorted list |
@@ -34,6 +38,7 @@ curl localhost:3000/doctors/dr-1/appointments
 ```
 src/slots.js     business logic (no Express, so it's easy to unit test)
 src/app.js       HTTP layer
+src/openapi.js   OpenAPI spec for Swagger UI
 src/server.js    entry point
 test/slots.test.js  unit tests
 test/api.test.js    integration tests against the real server
